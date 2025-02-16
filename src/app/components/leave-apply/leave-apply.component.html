@@ -1,0 +1,54 @@
+<div class="container mt-3">
+    <h2 class="text-center">Apply Leave</h2>
+    <br>
+    <form #form="ngForm" (ngSubmit)="onSubmit(form)" class="needs-validation">
+        <div class="row g-3">
+            <!-- From Date -->
+            <div class="col-md-4">
+                <label for="fromDate">From Date:</label>
+                <input type="date" [attr.min]="getMinDate()" class="form-control" id="fromDate" name="fromDate" [(ngModel)]="formData.fromDate"
+                    required />
+                <div *ngIf="form.submitted && !form.controls['fromDate']?.valid" class="text-danger">
+                    From Date is required.
+                </div>
+            </div>
+            <div class="col-md-4">
+                <!-- To Date -->
+                <label for="toDate">To Date:</label>
+                <input type="date" class="form-control" id="toDate" name="toDate" [(ngModel)]="formData.toDate"
+                    [min]="formData.fromDate" required />
+                <div *ngIf="form.submitted && !form.controls['toDate']?.valid" class="text-danger">
+                    To Date is required and should be after "From Date".
+                </div>
+            </div>
+        </div>
+        <br>
+        <!-- Comment -->
+        <div class="form-group">
+            <label for="comment">Comment:</label>
+            <textarea id="comment" class="form-control" name="comment" [(ngModel)]="formData.comment" rows="3" required
+                maxlength="500" placeholder="Enter a brief comment"></textarea>
+            <div *ngIf="form.submitted && !form.controls['comment']?.valid" class="text-danger">
+                Comment is required.
+            </div>
+            <small *ngIf="form.controls['comment']?.value?.length" class="form-text text-muted">
+                Max characters: 500
+            </small>
+        </div>
+        <br>
+        <!-- Dropdown -->
+        <div class="col-md-4">
+            <label for="dropdown">Select Leave Type:</label>
+            <select id="dropdown" class="form-control" name="dropdown" [(ngModel)]="formData.leavetype" required>
+                <option value="" disabled selected>Select leave type</option>
+                <option *ngFor="let event of leaveTypes" [value]="event.value">{{ event.label }}</option>
+            </select>
+            <div *ngIf="form.submitted && !form.controls['dropdown']?.valid" class="text-danger">
+                Please select leave type.
+            </div>
+        </div>
+        <br>
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>

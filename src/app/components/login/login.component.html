@@ -1,0 +1,17 @@
+<div class="login-card" style="margin-top: -100px;">
+    <div class="card-title">
+        <h1>Login</h1>
+        <span>You don't have an account? <a routerLink="/signup">Sign up</a></span>
+    </div>
+    <form class="form-group" [formGroup]="loginForm" (submit)="onSubmit()">        
+        <input type="text" name="username" formControlName="username" placeholder="Username"> 
+        <div *ngIf="loginForm.controls.username.invalid && loginForm.controls.username.touched" style="color: red;">
+            Username is Required.
+        </div>               
+        <input type="text" name="password" formControlName="password" placeholder="Password"> 
+        <div *ngIf="loginForm.controls.password?.invalid && loginForm.controls.password?.touched" style="color: red;">
+            Password is Required.
+        </div> 
+        <button type="submit" [disabled]="loginForm.invalid">Submit</button>        
+    </form>    
+</div>

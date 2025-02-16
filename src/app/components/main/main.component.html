@@ -1,0 +1,41 @@
+<!-- @if(isAuthenticated){ -->
+<nav class="navbar navbar-expand-sm bg-primary navbar-dark">
+    <!-- @if(show){ -->
+    <ul class="navbar-nav flex-grow-1">
+        <li class="nav-item" *ngIf="authService.getLoginType() == 'employee'">
+            <a routerLink="leave-apply" routerLinkActive="active" class="nav-link">Apply Leave</a>
+        </li>
+        <li class="nav-item" *ngIf="authService.getLoginType() == 'manager'">
+            <a routerLink="leave-approval" routerLinkActive="active" class="nav-link">Approve Leaves</a>
+        </li>
+        <li class="nav-item" *ngIf="authService.isAuthenticated()">
+            <a routerLink="leave-history" routerLinkActive="active" class="nav-link">Leave History</a>
+        </li>
+        <li class="nav-item" *ngIf="authService.getLoginType() == 'employee'">
+            <a routerLink="leave-balance" routerLinkActive="active" class="nav-link">Leave Balance</a>
+        </li>
+        @if(authService.isAuthenticated()){
+        <h3 class="text-center" style="color:navy; margin-left:150px;"> {{title}} </h3>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;          
+        <li class="nav-item">
+            <span> Welcome: {{authService.getLoggedInUsername()}}</span>
+        </li>
+        }
+        @else{
+        <h3 class="text-center" style="color:navy; margin-left:395px;"> {{title}} </h3>
+        }
+    </ul>
+    <ul class="nav navbar-nav navbar-right" style="margin-right: 10px;" *ngIf="authService.isAuthenticated()">
+        <li>
+            <button class="btn btn-secondary" (click)="logout()">Logout</button>
+        </li>
+    </ul>
+</nav>
+<div class="container">
+    <router-outlet></router-outlet>
+</div>
+<footer class="footer">
+    <div class="container">
+        <span>This is the POC for IBM Training.</span>
+    </div>
+</footer>
