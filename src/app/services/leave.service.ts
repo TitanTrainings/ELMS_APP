@@ -51,6 +51,11 @@ export class LeaveService {
         return this._httpClient.put<any>(this.apiUrl + 'Leave/reject/' + id, reject);
     }
 
+    getLeaveBalance(userId?: number): Observable<any> {
+
+        return this._httpClient.get<any>(this.apiUrl + 'User/leave-balance/' + userId);
+    }
+
     deleteLeave(id?: number): Observable<any> {
 
         return this._httpClient.delete<any>(this.apiUrl + 'Leave/' + id);

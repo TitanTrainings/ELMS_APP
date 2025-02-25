@@ -12,12 +12,14 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let item of leaveBalance">
-            <td class="text-center"></td>
-            <td class="text-center"></td>
-            <td class="text-center"></td>
-            <td class="text-center"></td>
-            <td class="text-center"></td>
-            <td class="text-center"></td>
+        <tr>
+            <td class="text-center">{{_leaveBalance.totalVacationLeave}}</td>
+            <td class="text-center">{{_leaveBalance.totalSickLeave}}</td>
+            <td class="text-center">{{_leaveBalance.totalAnnualLeave}}</td>
+            <td class="text-center">{{_leaveBalance.usedVacationLeave}}</td>
+            <td class="text-center">{{_leaveBalance.usedSickLeave}}</td>
+            <td class="text-center">{{_leaveBalance.remainingVacationLeave}}</td>
+            <td class="text-center">{{_leaveBalance.remainingSickLeave}}</td>
+            <td class="text-center">{{_leaveBalance.balanceAnnualLeave}}</td>
         </tr>
     </tbody>
