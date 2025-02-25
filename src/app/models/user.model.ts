@@ -4,7 +4,8 @@ export class User{
         public userId: number,
         public name: string,
         public role: string,
-        public leaveBalance: number,
+        public sickLeaveBalance: number,
+        public vacationLeaveBalance: number,
         public userName: string,
         public password: string        
       ) {}        

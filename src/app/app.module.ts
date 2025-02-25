@@ -11,6 +11,7 @@ import { LeaveService } from './services/leave.service';
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { AuthService } from './services/auth.service';
 import { AuthInterceptor } from './interceptor/authInterceptor';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
     declarations: [MainComponent, LoginComponent],
@@ -21,7 +22,7 @@ import { AuthInterceptor } from './interceptor/authInterceptor';
         EmployeeModule,
         ManagerModule, RouterModule.forRoot(routes)
     ],
-    providers: [AuthService,{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }   ,HttpClient,LeaveService],
+    providers: [DatePipe,AuthService,{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }   ,HttpClient,LeaveService],
     bootstrap: [MainComponent],
 })
 export class AppModule { }

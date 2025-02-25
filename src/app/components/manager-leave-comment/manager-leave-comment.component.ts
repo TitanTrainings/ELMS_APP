@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute , Router} from '@angular/router';
 import { Leave } from 'src/app/models/leave.model';
 import { LeaveService } from 'src/app/services/leave.service';
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-manager-leave-comment',  
@@ -17,26 +18,35 @@ export class ManagerLeaveCommentComponent implements OnInit{
     fromDate: '',
     toDate: '',
     comment: '',
-    leavetype: ''
+    leaveType: ''
   };
 
-  constructor(private _route: ActivatedRoute,private _leaveService: LeaveService){    
+  constructor(private _route: ActivatedRoute,private _router: Router,private _leaveService: LeaveService,private datePipe: DatePipe){    
   }
 
   ngOnInit(){
     this.id = this._route.snapshot.params['id'];
         
     this._leaveService.getLeaveById(this.id).subscribe( data => {
-      this.leave = data;
+      var startDat = this.datePipe.transform(data.response.startDate,"yyyy-MM-dd");
+      var endDatDat = this.datePipe.transform(data.response.endDate,"yyyy-MM-dd");
+      this.formData.comment = data.response.managerComments;
+      this.formData.leaveType = data.response.leaveType;
+      this.formData.fromDate = startDat != null ? startDat : '';
+      this.formData.toDate = endDatDat != null ? endDatDat : '';
+      
     });
 
   }
  
   onSubmit(form: any){
-    console.log(this.leave);
-    console.log(this.formData);
+    this.leave.leaveRequestId = this.id;
+    this.leave.managerComments = this.formData.comment;    
     // update the below function as per requirement.
-    this._leaveService.editLeave(1,this.leave);
+    this._leaveService.addManagerComment(this.leave).subscribe(data => {
+      alert("comment added successfully !");
+      this._router.navigate(['/leave-approval']);
+    })
   }
 
 }

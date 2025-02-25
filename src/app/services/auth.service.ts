@@ -69,6 +69,14 @@ export class AuthService {
     this._router.navigate(['/login']);
   }
   
+  public getLoggedInUsersName(): string | null {
+    const token = this.getToken();
+
+    const decodedToken = this.decodeJwt(token != null ? token : '')
+
+    return decodedToken.name || null;
+  }
+
   public getLoggedInUsername(): string | null {
     const token = this.getToken();
 
@@ -76,6 +84,19 @@ export class AuthService {
 
     return decodedToken.username || null;
   }
+
+  public getLoggedInUserId(): string | null {
+    const token = this.getToken();
+
+    const decodedToken = this.decodeJwt(token != null ? token : '')
+
+    return decodedToken.userId || null;
+  }
+  
+  getUserByUserId(userId?: number): Observable<any> {
+
+    return this._httpClient.get<any>(this.apiUrl + 'User/getUserByUserId/' + userId);
+}
 
 }
 

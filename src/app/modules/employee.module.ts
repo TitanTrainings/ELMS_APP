@@ -4,11 +4,12 @@ import { LeaveApplyComponent } from '../components/leave-apply/leave-apply.compo
 import { LeaveBalanceComponent } from '../components/leave-balance/leave-balance.component';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { LeaveRequestDetailsComponent } from '../components/leave-request-details/leave-request-details.component';
 
 
 @NgModule({
-    declarations: [LeaveApplyComponent,LeaveBalanceComponent],
+    declarations: [LeaveApplyComponent,LeaveBalanceComponent,LeaveRequestDetailsComponent],
     imports: [CommonModule,FormsModule,BrowserModule],
-    exports: [LeaveApplyComponent,LeaveBalanceComponent] // Export the component to make it usable outside
+    exports: [LeaveApplyComponent,LeaveBalanceComponent,LeaveRequestDetailsComponent] // Export the component to make it usable outside
   })
   export class EmployeeModule {}

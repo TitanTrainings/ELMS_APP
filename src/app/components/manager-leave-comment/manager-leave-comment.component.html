@@ -6,7 +6,7 @@
             <!-- From Date -->
             <div class="col-md-4">
                 <label for="fromDate">From Date:</label>
-                <input type="date" [disabled]="true" class="form-control" id="fromDate" name="fromDate" [(ngModel)]="formData.fromDate"/>                
+                <input type="date" [disabled]="true" class="form-control" id="fromDate" name="fromDate" datetime="yyyy-MM-dd HH" [(ngModel)]="formData.fromDate"/>                
             </div>
             <div class="col-md-4">
                 <!-- To Date -->
@@ -23,8 +23,9 @@
         </div>
         <br>
         <!-- Dropdown -->
-        <div class="col-md-4">
-            <label for="dropdown">Select Leave Type:</label>                      
+        <div class="form-group">
+            <label for="comment">LeaveType:</label>
+            <textarea [disabled]="true" id="leaveType" class="form-control" name="leaveType" [(ngModel)]="formData.leaveType" rows="3"></textarea>                       
         </div>
         <br>
         <!-- Submit Button -->

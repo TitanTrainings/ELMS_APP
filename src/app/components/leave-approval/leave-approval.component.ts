@@ -1,54 +1,68 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { Leave } from 'src/app/models/leave.model';
 import { AuthService } from 'src/app/services/auth.service';
+import { LeaveService } from 'src/app/services/leave.service';
 
 @Component({
-  selector: 'app-leave-approval', 
+  selector: 'app-leave-approval',
   templateUrl: './leave-approval.component.html',
   styleUrl: './leave-approval.component.css'
 })
-export class LeaveApprovalComponent {
+export class LeaveApprovalComponent implements OnInit {
 
-  constructor(private authService: AuthService, private _router: Router) {
+  userId: number = 0;
+  public leaveRequests: Leave[] = [];  
+
+  constructor(private _authService: AuthService, private _leaveService: LeaveService, private _router: Router) {
+  }
+
+  searchText: string = '';    
+
+  ngOnInit(): void {    
+    this.getLeaveRequests();
+  }
   
-    }
-
-  searchText: string = '';
-  // Sample data for the table
-  data = [
-    { id: 1, name: 'John Doe', email: 'john@example.com' },
-    { id: 2, name: 'Jane Smith', email: 'jane@example.com' },
-    { id: 3, name: 'Michael Johnson', email: 'michael@example.com' },
-    { id: 4, name: 'Sarah Lee', email: 'sarah@example.com' },
-    { id: 5, name: 'David Brown', email: 'david@example.com' }
-  ];
 
   get filteredData() {
-    return this.data.filter(item => 
-      item.name.toLowerCase().includes(this.searchText.toLowerCase()) || 
-      item.email.toLowerCase().includes(this.searchText.toLowerCase())
+    
+    return this.leaveRequests.filter(item =>      
+      item.managerComments?.toLowerCase().includes(this.searchText.toLowerCase()) ||
+      item.leaveType?.toLowerCase().includes(this.searchText.toLowerCase()) ||
+      item.status?.toLowerCase().includes(this.searchText.toLowerCase()) ||
+      item.userId?.toString().includes(this.searchText.toString())      
     );
   }
 
-  ApproveLeave(id?: number){
-    if(confirm("Are you sure you want to approve ?"))
-      {
-        alert(id);
-      }
-    //this._router.navigate(['/productDetail', id]);
+  ApproveLeave(id?: number) {
+    if (confirm("Are you sure you want to approve ?")) {
+      this._leaveService.approveLeave(id,true).subscribe(data => {
+        alert("Leave approved successfully !");
+        this.getLeaveRequests();
+      })
+    }    
   }
 
-  RejectLeave(id?: number){
-    if(confirm("Are you sure you want to reject ?"))
-      {
-        alert(id);
-      }
-    //this._routerrouter.navigate(['/edit-product', id]);
+  RejectLeave(id?: number) {
+    if (confirm("Are you sure you want to reject ?")) {
+      this._leaveService.rejectLeave(id,true).subscribe(data => {
+        alert("Leave rejected successfully !");
+        this.getLeaveRequests();
+      })
+    }
+    //this._router.navigate(['/edit-product', id]);
   }
 
-  CommentLeave(id?: number){
+  getLeaveRequests(){
+    this._leaveService.getPendingLeaves().subscribe(data => {
+      this.leaveRequests = data.response;            
+    })
+  }
+
+  CommentLeave(id?: number) {
     this._router.navigate(['/leave-comment', id]);
-    
+
   }
 
 

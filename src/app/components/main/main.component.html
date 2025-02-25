@@ -18,7 +18,7 @@
         <h3 class="text-center" style="color:navy; margin-left:150px;"> {{title}} </h3>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;          
         <li class="nav-item">
-            <span> Welcome: {{authService.getLoggedInUsername()}}</span>
+            <span> Welcome: {{authService.getLoggedInUsersName()}}</span>
         </li>
         }
         @else{
@@ -34,8 +34,8 @@
 <div class="container">
     <router-outlet></router-outlet>
 </div>
-<footer class="footer">
+<!-- <footer class="footer">
     <div class="container">
         <span>This is the POC for IBM Training.</span>
     </div>
-</footer>
+</footer> -->

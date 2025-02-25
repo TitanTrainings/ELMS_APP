@@ -8,6 +8,7 @@ import { RoleGuard } from './guards/roleGuard';
 import { UnAuthorizePageComponent } from './components/un-authorize-page/un-authorize-page.component';
 import { AuthGuard } from './guards/authGuard';
 import { ManagerLeaveCommentComponent } from './components/manager-leave-comment/manager-leave-comment.component';
+import { LeaveRequestDetailsComponent } from './components/leave-request-details/leave-request-details.component';
 
 
 export const routes: Routes = [
@@ -17,6 +18,7 @@ export const routes: Routes = [
     { path: 'leave-approval', component: LeaveApprovalComponent,canActivate: [RoleGuard],data: { role: 'manager' } }, 
     { path: 'leave-balance', component: LeaveBalanceComponent,canActivate: [RoleGuard],data: { role: 'employee' } },
     { path: 'leave-history', component: LeaveHistoryComponent, canActivate: [AuthGuard]},
+    { path: 'leave-request-details/:id', component: LeaveRequestDetailsComponent, canActivate: [AuthGuard]},
     { path: 'leave-comment/:id', component: ManagerLeaveCommentComponent,canActivate: [RoleGuard],data: { role: 'manager' }},
     { path: 'un-authorized', component: UnAuthorizePageComponent },
     { path: '**', component: LoginComponent} 

@@ -22,20 +22,7 @@
                 </div>
             </div>
         </div>
-        <br>
-        <!-- Comment -->
-        <div class="form-group">
-            <label for="comment">Comment:</label>
-            <textarea id="comment" class="form-control" name="comment" [(ngModel)]="formData.comment" rows="3" required
-                maxlength="500" placeholder="Enter a brief comment"></textarea>
-            <div *ngIf="form.submitted && !form.controls['comment']?.valid" class="text-danger">
-                Comment is required.
-            </div>
-            <small *ngIf="form.controls['comment']?.value?.length" class="form-text text-muted">
-                Max characters: 500
-            </small>
-        </div>
-        <br>
+        <br>        
         <!-- Dropdown -->
         <div class="col-md-4">
             <label for="dropdown">Select Leave Type:</label>
@@ -48,6 +35,9 @@
             </div>
         </div>
         <br>
+        <span>
+            {{errorMessage}}
+        </span>
         <!-- Submit Button -->
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>

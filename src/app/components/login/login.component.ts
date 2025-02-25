@@ -43,7 +43,7 @@ export class LoginComponent {
 
   onSubmit() {
 
-    const _user = new User(0, '', '', 0, this.getUsername(), this.getPassword());
+    const _user = new User(0, '', '', 0,0, this.getUsername(), this.getPassword());
 
     this.authService.AuthenticateUser(_user).subscribe(data =>{
       

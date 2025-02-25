@@ -16,29 +16,39 @@ export class LeaveService {
 
     }
 
-    getLeaves(): Observable<Leave[]> {
+    getPendingLeaves(): Observable<any> {
 
-        return this._httpClient.get<Leave[]>(this.apiUrl + 'Leave');
+        return this._httpClient.get<any>(this.apiUrl + 'Leave/getPendingLeaves');
+    }
+    
+    getLeaveByUserId(userId?: number): Observable<any> {
+
+        return this._httpClient.get<any>(this.apiUrl + 'Leave/GetLeaveRequests/' + userId);
     }
 
-    getLeaveById(id?: number): Observable<Leave> {
+    getLeaveById(Id?: number): Observable<any> {
 
-        return this._httpClient.get<Leave>(this.apiUrl + '/Leave/' + id);
+        return this._httpClient.get<any>(this.apiUrl + 'Leave/GetLeaveRequestById/' + Id);
     }
 
-    addLeave(_leave: Leave): Observable<Leave> {
+    addLeave(_leave: Leave): Observable<any> {
 
-        return this._httpClient.post<Leave>(this.apiUrl + 'Leave/', _leave);
+        return this._httpClient.post<any>(this.apiUrl + 'Leave/CreateLeaveRequest/', _leave);
     }
 
-    editLeave(id: number, _leave: Leave): Observable<Leave> {
+    addManagerComment(_leave: Leave): Observable<any> {
 
-        return this._httpClient.put<Leave>(this.apiUrl + 'Leave/' + id, _leave);
+        return this._httpClient.put<any>(this.apiUrl + 'Leave/addManagerComment/', _leave);
     }
 
-    approveLeave(id: number, approve: boolean): Observable<Leave> {
+    approveLeave(id?: number, approve?: boolean): Observable<any> {
 
-        return this._httpClient.put<Leave>(this.apiUrl + 'Leave/' + id, approve);
+        return this._httpClient.put<any>(this.apiUrl + 'Leave/approve/' + id, approve);
+    }
+
+    rejectLeave(id?: number, reject?: boolean): Observable<any> {
+
+        return this._httpClient.put<any>(this.apiUrl + 'Leave/reject/' + id, reject);
     }
 
     deleteLeave(id?: number): Observable<any> {

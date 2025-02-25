@@ -1,0 +1,11 @@
+<div *ngIf="leaveDetail">
+    <h2>Leave Details for {{ "test" }}</h2>    
+    <p><strong>From:</strong> {{ leaveDetail.startDate }}</p>
+    <p><strong>To:</strong> {{ leaveDetail.endDate }}</p>
+    <p><strong>Comment:</strong> {{ leaveDetail.managerComments }}</p>
+    <p><strong>Status:</strong> {{ leaveDetail.status }}</p>
+  </div>
+  
+  <div *ngIf="!leaveDetail">
+    <p>Leave details not found.</p>
+  </div>
